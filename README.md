@@ -5,9 +5,9 @@ LevelUP
 
 **Fast & simple storage - a Node.js-style LevelDB wrapper**
 
-[![Build Status](https://secure.travis-ci.org/rvagg/node-levelup.png)](http://travis-ci.org/rvagg/node-levelup)
+[![Build Status](https://secure.travis-ci.org/snowyu/node-levelup-sync.png)](http://travis-ci.org/snowyu/node-levelup-sync)
 
-[![NPM](https://nodei.co/npm/levelup.png?stars&downloads&downloadRank)](https://nodei.co/npm/levelup/) [![NPM](https://nodei.co/npm-dl/levelup.png?months=6&height=3)](https://nodei.co/npm/levelup/)
+[![NPM](https://nodei.co/npm/levelup-sync.png?stars&downloads&downloadRank)](https://nodei.co/npm/levelup-sync/) [![NPM](https://nodei.co/npm-dl/levelup-sync.png?months=6&height=3)](https://nodei.co/npm/levelup-sync/)
 
 
   * <a href="#intro">Introduction</a>
