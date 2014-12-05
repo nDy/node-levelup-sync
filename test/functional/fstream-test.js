@@ -49,13 +49,21 @@ var assert       = require('referee').assert
     }
 
   , fstreamRead = function (dir, db, callback) {
+      function runNext() {
+              db.close(function (err) {
+                refute(err)
+                callback(null, dir)
+              })
+      }
       db.readStream({ type: 'fstream' })
         .pipe(new fstream.Writer({ path: dir + '.out', type: 'Directory' })
+          .on('error', function(err){
+            //the directory is still creating...
+            if (err.code == 'ENOENT') runNext()
+            else throw err
+          })
           .on('close', function () {
-            db.close(function (err) {
-              refute(err)
-              callback(null, dir)
-            })
+            runNext()
           })
         )
     }
