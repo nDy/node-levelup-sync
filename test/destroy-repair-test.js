@@ -4,7 +4,7 @@
  */
 
 var levelup   = require('../lib/levelup.js')
-  , leveldown = require('leveldown')
+  , leveldown = require('leveldown-sync')
 
   , assert    = require('referee').assert
   , refute    = require('referee').refute

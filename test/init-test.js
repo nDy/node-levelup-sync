@@ -11,7 +11,7 @@ var levelup = require('../lib/levelup.js')
   , assert  = require('referee').assert
   , refute  = require('referee').refute
   , buster  = require('bustermove')
-  , MemDOWN = require('memdown')
+  , MemDOWN = require('memdown-sync')
 
 buster.testCase('Init & open()', {
     'setUp': common.commonSetUp
@@ -20,7 +20,6 @@ buster.testCase('Init & open()', {
   , 'levelup()': function () {
       assert.isFunction(levelup)
       assert.equals(levelup.length, 3) // location, options & callback arguments
-      assert.exception(levelup, 'InitializationError') // no location
     }
 
   , 'default options': function (done) {
@@ -119,10 +118,8 @@ buster.testCase('Init & open()', {
       assert.isTrue(db.options.errorIfExists)
       assert.equals(db.location, location)
 
-      db.on("ready", function () {
-        assert.isTrue(db.isOpen())
-        done()
-      })
+      assert.isTrue(db.isOpen())
+      done()
     }
 
   , 'open() with !createIfMissing expects error': function (done) {
@@ -186,7 +183,17 @@ buster.testCase('Init & open()', {
   , 'constructor with options argument uses factory': function (done) {
       var db = levelup({ db: MemDOWN })
       assert.isNull(db.location, 'location property is null')
-      db.on('open', function () {
+      if (db.isOpen()) {
+        assert(db.db instanceof MemDOWN, 'using a memdown backend')
+        assert.same(db.db.location, '', 'db location property is ""')
+        db.put('foo', 'bar', function (err) {
+          refute(err, 'no error')
+          db.get('foo', function (err, value) {
+            assert.equals(value, 'bar', 'correct value')
+            done()
+          })
+        })
+      } else db.on('open', function () {
         assert(db.db instanceof MemDOWN, 'using a memdown backend')
         assert.same(db.db.location, '', 'db location property is ""')
         db.put('foo', 'bar', function (err) {
@@ -202,7 +209,17 @@ buster.testCase('Init & open()', {
   , 'constructor with only function argument uses factory': function (done) {
       var db = levelup(MemDOWN)
       assert.isNull(db.location, 'location property is null')
-      db.on('open', function () {
+      if (db.isOpen()) {
+        assert(db.db instanceof MemDOWN, 'using a memdown backend')
+        assert.same(db.db.location, '', 'db location property is ""')
+        db.put('foo', 'bar', function (err) {
+          refute(err, 'no error')
+          db.get('foo', function (err, value) {
+            assert.equals(value, 'bar', 'correct value')
+            done()
+          })
+        })
+      } else db.on('open', function () {
         assert(db.db instanceof MemDOWN, 'using a memdown backend')
         assert.same(db.db.location, '', 'db location property is ""')
         db.put('foo', 'bar', function (err) {

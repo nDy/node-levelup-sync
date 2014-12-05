@@ -10,11 +10,13 @@ var levelup = require('../lib/levelup.js')
   , refute  = require('referee').refute
   , buster  = require('bustermove')
 
+function noop(){}
+
 function test(fun) {
   return function (done) {
     var location = common.nextLocation()
     // 1) open database without callback, opens in worker thread
-      , db       = levelup(location, { createIfMissing: true, errorIfExists: true, encoding: 'utf8'})
+      , db       = levelup(location, { createIfMissing: true, errorIfExists: true, encoding: 'utf8'}, noop)
 
     this.closeableDatabases.push(db)
     this.cleanupDirs.push(location)

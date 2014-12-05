@@ -3,6 +3,8 @@
  * MIT License <https://github.com/rvagg/node-levelup/blob/master/LICENSE.md>
  */
 
+var LEVEDOWN_PKG_NAME = 'leveldown-sync'
+
 var assert  = require('referee').assert
   , refute  = require('referee').refute
   , buster  = require('bustermove')
@@ -10,8 +12,8 @@ var assert  = require('referee').assert
 
 function clearCache () {
   delete require.cache[require.resolve('..')]
-  delete require.cache[require.resolve('leveldown')]
-  delete require.cache[require.resolve('leveldown/package')]
+  delete require.cache[require.resolve(LEVEDOWN_PKG_NAME)]
+  delete require.cache[require.resolve(LEVEDOWN_PKG_NAME+'/package')]
   delete require.cache[require.resolve('../lib/util')]
 }
 
@@ -21,12 +23,12 @@ buster.testCase('Optional LevelDOWN', {
 
   , 'test getLevelDOWN()': function () {
       var util = require('../lib/util')
-      assert.same(util.getLevelDOWN(), require('leveldown'), 'correct leveldown provided')
+      assert.same(util.getLevelDOWN(), require(LEVEDOWN_PKG_NAME), 'correct leveldown provided')
     }
 
   , 'test wrong version': function () {
       var levelup = require('..')
-      require('leveldown/package').version = '0.0.0'
+      require(LEVEDOWN_PKG_NAME+'/package').version = '0.0.0'
       assert.exception(levelup.bind(null, '/foo/bar'), function (err) {
         if (err.name != 'LevelUPError')
           return false
@@ -39,7 +41,7 @@ buster.testCase('Optional LevelDOWN', {
   , 'test no leveldown/package': function () {
       var levelup = require('..')
       // simulate an exception from a require() that doesn't resolved a package
-      Object.defineProperty(require.cache, require.resolve('leveldown/package'), {
+      Object.defineProperty(require.cache, require.resolve(LEVEDOWN_PKG_NAME+'/package'), {
         get: function() {
           throw new Error('Wow, this is kind of evil isn\'t it?')
         }
@@ -56,7 +58,7 @@ buster.testCase('Optional LevelDOWN', {
   , 'test no leveldown': function () {
       var levelup = require('..')
       // simulate an exception from a require() that doesn't resolved a package
-      Object.defineProperty(require.cache, require.resolve('leveldown'), {
+      Object.defineProperty(require.cache, require.resolve(LEVEDOWN_PKG_NAME), {
         get: function() {
           throw new Error('Wow, this is kind of evil isn\'t it?')
         }

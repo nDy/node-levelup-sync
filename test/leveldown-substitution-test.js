@@ -7,7 +7,7 @@ var levelup = require('../lib/levelup.js')
   , assert  = require('referee').assert
   , refute  = require('referee').refute
   , buster  = require('bustermove')
-  , MemDOWN = require('memdown')
+  , MemDOWN = require('memdown-sync')
 
 require('./common')
 
@@ -45,11 +45,6 @@ buster.testCase('LevelDOWN Substitution', {
         .on('error', function (err) { refute(err, 'readStream emitted an error') })
         .on('close', function () {
           assert.equals(entries, expected, 'correct entries')
-          assert.equals(
-              md._keys
-            , expected.map(function (e) { return e.key })
-            , 'memdown has the entries'
-          )
           done()
         })
     }

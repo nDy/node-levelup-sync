@@ -95,30 +95,6 @@ buster.testCase('get() / put() / del()', {
         }
     }
 
-  , 'test get() throwables': function (done) {
-      this.openTestDatabase(function (db) {
-
-        assert.exception(
-            db.get.bind(db)
-          , { name: 'ReadError', message: 'get() requires key and callback arguments' }
-          , 'no-arg get() throws'
-        )
-
-        assert.exception(
-            db.get.bind(db, 'foo')
-          , { name: 'ReadError', message: 'get() requires key and callback arguments' }
-          , 'callback-less, 1-arg get() throws'
-        )
-
-        assert.exception(
-            db.get.bind(db, 'foo', {})
-          , { name: 'ReadError', message: 'get() requires key and callback arguments' }
-          , 'callback-less, 2-arg get() throws'
-        )
-
-        done()
-      })
-    }
 
   , 'test put() throwables': function (done) {
       this.openTestDatabase(function (db) {

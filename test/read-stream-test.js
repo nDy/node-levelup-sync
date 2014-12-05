@@ -17,6 +17,8 @@ var levelup    = require('../lib/levelup.js')
 
   , bigBlob    = Array.apply(null, Array(1024 * 100)).map(function () { return 'aaaaaaaaaa' }).join('')
 
+function noop() {}
+
 buster.testCase('ReadStream', {
     'setUp': common.readStreamSetUp
 
@@ -558,7 +560,7 @@ buster.testCase('ReadStream', {
               refute(err)
               db.close(function (err) {
                 refute(err)
-                var db2 = levelup(db.location, { createIfMissing: false, errorIfExists: false, encoding: 'utf8' })
+                var db2 = levelup(db.location, { createIfMissing: false, errorIfExists: false, encoding: 'utf8' }, noop)
                 execute(db2)
               })
             }.bind(this))
