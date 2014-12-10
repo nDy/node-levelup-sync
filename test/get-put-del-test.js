@@ -31,6 +31,16 @@ buster.testCase('get() / put() / del()', {
           })
         }
 
+      , 'isExists() on empty database': function (done) {
+          this.openTestDatabase(function (db) {
+            db.isExists('undefkey', function (err, value) {
+              refute(err)
+              assert(value === false, 'should be not exists')
+              done()
+            })
+          })
+        }
+
       , 'put() and get() simple string key/value pairs': function (done) {
           this.openTestDatabase(function (db) {
             db.put('some key', 'some value stored in the database', function (err) {
@@ -38,7 +48,11 @@ buster.testCase('get() / put() / del()', {
               db.get('some key', function (err, value) {
                 refute(err)
                 assert.equals(value, 'some value stored in the database')
-                done()
+                db.isExists('some key', function (err, value) {
+                  refute(err)
+                  assert(value === true, 'should be exists')
+                  done()
+                })
               })
             })
           })

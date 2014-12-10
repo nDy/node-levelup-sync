@@ -1,7 +1,7 @@
 {
   "name": "levelup-sync",
   "description": "Fast & simple storage - a Node.js-style LevelDB wrapper with sync supports",
-  "version": "0.19.2",
+  "version": "0.20.0",
   "contributors": [
     "Riceball LEE <snowyu.lee@gmail.com> (https://github.com/snowyu)",
     "Rod Vagg <r@va.gg> (https://github.com/rvagg)",
@@ -44,7 +44,7 @@
     "xtend": "~3.0.0"
   },
   "devDependencies": {
-    "leveldown-sync": "~1.0.1",
+    "leveldown-sync": "~1.1.0",
     "bustermove": "*",
     "tap": "*",
     "referee": "*",
