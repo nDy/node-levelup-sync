@@ -1,7 +1,7 @@
 {
   "name": "levelup-sync",
   "description": "Fast & simple storage - a Node.js-style LevelDB wrapper with sync supports",
-  "version": "0.20.0",
+  "version": "0.20.2",
   "contributors": [
     "Riceball LEE <snowyu.lee@gmail.com> (https://github.com/snowyu)",
     "Rod Vagg <r@va.gg> (https://github.com/rvagg)",
@@ -16,13 +16,14 @@
     "Anton Whalley <anton.whalley@nearform.com> (https://github.com/No9)",
     "Matteo Collina <matteo.collina@gmail.com> (https://github.com/mcollina)",
     "Pedro Teixeira <pedro.teixeira@gmail.com> (https://github.com/pgte)",
-    "James Halliday <mail@substack.net> (https://github.com/substack)"
+    "James Halliday <mail@substack.net> (https://github.com/substack)",
+    "Andres Rangel <ndy.work@gmail.com> (https://github.com/ndy)"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/snowyu/node-levelup-sync.git"
+    "url": "https://github.com/ndy/node-levelup-sync.git"
   },
-  "homepage": "https://github.com/snowyu/node-levelup-sync",
+  "homepage": "https://github.com/ndy/node-levelup-sync",
   "keywords": [
     "nosql",
     "leveldb",
@@ -44,7 +45,7 @@
     "xtend": "~3.0.0"
   },
   "devDependencies": {
-    "leveldown-sync": "~1.1.0",
+    "nosql-leveldb": "*",
     "bustermove": "*",
     "tap": "*",
     "referee": "*",
